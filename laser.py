@@ -1,6 +1,5 @@
 import requests
 import time
-import requests
 from easySteering import *
 
 base_url = "http://192.168.100.18:2018"
@@ -11,25 +10,33 @@ oauth_config = {
     "token_url": "http://192.168.100.18:8080/realms/master/protocol/openid-connect/token"
 }
 
-def goToComet(x,y):
-    flyToCoordinates( x,  y)
-
-    
-
 def configure_oauth():
     url = f"{base_url}/configure_oauth"
     response = requests.post(url, json=oauth_config)
     print(response.json())
-
 
 def activate_laser():
     url = f"{base_url}/activate"
     response = requests.post(url)
     print(response.json())
 
+def get_current_coordinates():
+    # Assuming there's an API to get the current coordinates
+    url = f"{base_url}/current_coordinates"
+    response = requests.get(url)
+    return response.json()
+
+def goToComet(x, y):
+    flyToCoordinates(x, y)
+    current_coords = get_current_coordinates()
+    
+    if current_coords["x"] == x and current_coords["y"] == y:
+        changeToIdle()
+
 configure_oauth()
+
 goToComet(-10000, 20500)
 
-while(True):
+while True:
     activate_laser()
     time.sleep(10)
