@@ -25,3 +25,11 @@ async def flyToCoordinates(x, y):
         
     response = requests.post(url, json=data)
     return response.json()
+
+def changeToIdle():
+    url = "http://192.168.100.18:2009/set_target"
+    data = {"target": "idle"}
+
+    repsponse = requests.post(url, json=data)
+    return repsponse.json()
+    
