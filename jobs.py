@@ -9,8 +9,9 @@ async def SellEverythingAtCoreStation():
     await flyToName("Core Station")
     cargoHold = getCargoHold()
     resources = cargoHold.get('hold').get('resources')
-    for resourceName, amount in resources.items():
-        sell("Core Station", resourceName, amount)
+    for i in range(10):
+        for resourceName, amount in resources.items():
+            sell("Core Station", resourceName, amount)
 
 async def BuyIron():
     await flyToName("Vesta Station")
