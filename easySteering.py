@@ -1,5 +1,6 @@
 import requests
 import asyncio
+from navigation import *
 from communication import *
 
 
@@ -21,11 +22,13 @@ async def flyToCoordinates(x, y):
     url = "http://192.168.100.18:2009/set_target"
     data = {"target": {"x": x, "y": y}}
 
-    stationsInReach = {}
-    while(stationsInReach == {}):
-        stationsInReach = getStationsInReach().get('stations')
-
     response = requests.post(url, json=data)
+
+    distance = 100
+    while(distance > 20):
+        distance = getDistance(x, y)
+        print(distance)
+
     return response.json()
 
 def changeToIdle():
@@ -34,4 +37,3 @@ def changeToIdle():
 
     repsponse = requests.post(url, json=data)
     return repsponse.json()
-    
