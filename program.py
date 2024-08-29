@@ -1,12 +1,11 @@
 import requests
 from easySteering import *
 from communication import *
+from jobs import *
 
-result = flyTo("Vesta Station")
-print(result)
+async def execute():
+    while(True):
+        await SellEverythingAtCoreStation()
+        await BuyIron()
 
-result = buy("Vesta Station", "IRON", 100)
-print(result)
-
-result = sell("Core Station", "GOLD", 1)
-print(result)
+asyncio.run(execute())

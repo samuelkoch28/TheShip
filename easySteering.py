@@ -10,9 +10,11 @@ async def flyToName(name):
     response = requests.post(url, json=data)
 
     stationsInReach = {}
-    while(stationsInReach == {}):
-        stationsInReach = getStationsInReach().get('stations')
-
+    firstStationInReach = {}
+    while(not firstStationInReach == name):
+        stationsInReach = list(getStationsInReach().get("stations", {}).keys())        
+        if(stationsInReach):
+            firstStationInReach = stationsInReach[0]
     return response.json()
 
 async def flyToCoordinates(x, y):
@@ -22,7 +24,7 @@ async def flyToCoordinates(x, y):
     stationsInReach = {}
     while(stationsInReach == {}):
         stationsInReach = getStationsInReach().get('stations')
-        
+
     response = requests.post(url, json=data)
     return response.json()
 
