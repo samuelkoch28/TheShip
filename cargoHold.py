@@ -31,5 +31,3 @@ def optimizeStorage():
                         if(structure[rowIndex + 1][itemIndex] == None):
                             swapCargo(itemIndex, rowIndex, itemIndex, rowIndex + 1)
                             time.sleep(0.5)
-
-optimizeStorage()

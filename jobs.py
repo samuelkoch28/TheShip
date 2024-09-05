@@ -6,6 +6,7 @@ from cargoHold import *
 
 
 async def sellEverythingAtCoreStation():
+    print("flying to Core Station")
     await flyToName("Core Station")
     cargoHold = getCargoHold()
     resources = cargoHold.get('hold').get('resources')
@@ -14,6 +15,7 @@ async def sellEverythingAtCoreStation():
             sell("Core Station", resourceName, amount)
 
 async def buyIron():
+    print("flying to Vesta")
     await flyToName("Vesta Station")
     cargoHold = getCargoHold()
     holdFree = cargoHold.get('hold').get('hold_free')
