@@ -4,8 +4,9 @@ from communication import *
 from jobs import *
 
 async def execute():
+    optimizeStorage()
     while(True):
-        await SellEverythingAtCoreStation()
-        await BuyIron()
+        await sellEverythingAtCoreStation()
+        await buyIron()
 
 asyncio.run(execute())

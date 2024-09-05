@@ -5,7 +5,7 @@ from communication import *
 from cargoHold import *
 
 
-async def SellEverythingAtCoreStation():
+async def sellEverythingAtCoreStation():
     await flyToName("Core Station")
     cargoHold = getCargoHold()
     resources = cargoHold.get('hold').get('resources')
@@ -13,8 +13,9 @@ async def SellEverythingAtCoreStation():
         for resourceName, amount in resources.items():
             sell("Core Station", resourceName, amount)
 
-async def BuyIron():
+async def buyIron():
     await flyToName("Vesta Station")
     cargoHold = getCargoHold()
     holdFree = cargoHold.get('hold').get('hold_free')
     buy("Vesta Station", "IRON", holdFree)
+    
