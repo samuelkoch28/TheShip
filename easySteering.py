@@ -25,7 +25,7 @@ async def flyToCoordinates(x, y):
     response = requests.post(url, json=data)
 
     distance = 100
-    while(distance > 20):
+    while(distance > 100):
         distance = getDistance(x, y)
         print(distance)
 

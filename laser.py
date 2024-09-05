@@ -65,9 +65,7 @@ async def farmGold():
     configure_oauth()
 
     while True:
-        print("fotze")
         await flyToCoordinates(-10000, 20500)
-        print("PENIS")
 
         time.sleep(4)
         changeToIdle()
@@ -79,8 +77,7 @@ async def farmGold():
 
         while not is_cargo_full():
             activate_laser()
-            time.sleep(10)  
+            time.sleep(9)  
 
         await sellEverythingAtCoreStation()
 
-asyncio.run(farmGold())
