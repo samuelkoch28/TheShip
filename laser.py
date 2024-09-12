@@ -23,37 +23,6 @@ def activate_laser():
     response = requests.post(url)
     print(response.json())
 
-def getCargoHold():
-    url = "http://192.168.100.18:2012/hold"
-    response = requests.get(url)
-    return response.json()
-
-def sell(station_name, resource_name, amount):
-    url = "http://192.168.100.18:2013/sell"
-    data = {"station": station_name, "resource": resource_name, "amount": amount}
-    response = requests.post(url, json=data)
-    return response.json()
-
-
-
-async def flyToCoordinates(x, y):
-    url = "http://192.168.100.18:2009/set_target"
-    data = {"target": {"x": x, "y": y}}
-
-    response = requests.post(url, json=data)
-
-    distance = 100
-    while distance > 20:
-        distance = getDistance(x, y)
-        print(f"Current distance: {distance}")
-        await asyncio.sleep(1)
-
-    return response.json()
-
-def is_cargo_full():
-    cargo_hold = getCargoHold()
-    hold_free = cargo_hold.get("hold_free")
-    return hold_free == 0
 
 def changeToIdle():
     url = "http://192.168.100.18:2009/set_target"
@@ -81,3 +50,25 @@ async def farmGold():
 
         await sellEverythingAtCoreStation()
 
+def pointLaserTo(x2, y2):
+    x1 = getCoordinates().get('x')
+    y1 = getCoordinates().get('y')
+    shipAngle = getCoordinates().get('angle')
+ 
+    dx = x2 - x1
+    dy = y2 - y1
+    angle_radians = math.atan2(dy, dx)
+    angle_degrees = math.degrees(angle_radians)
+    angle_degrees = 360 - angle_degrees
+    angle_degrees += 90
+    angle_degrees -= shipAngle
+    if angle_degrees < 0:
+        angle_degrees += 360
+   
+    changeAngleTo(angle_degrees)
+
+def changeAngleTo(alpha):
+    url = "http://192.168.100.18:2018/angle"
+    data = {"angle": alpha}
+    response = requests.put(url, json=data)
+    return response.json()

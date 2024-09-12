@@ -1,5 +1,6 @@
 import requests, math, pika, json, asyncio
 from easySteering import *
+from laser import *
  
 def getScannerResults():
     connection = pika.BlockingConnection(pika.ConnectionParameters(host="192.168.100.18", port=2014))
@@ -21,11 +22,12 @@ def getScannerResults():
     connection.close()
     return json.loads(body.decode('utf-8'))
  
-asyncio.run(flyToCoordinates(13100, 13500))
+asyncio.run(flyToCoordinates(17333, -14000))
 while (True):
     data = getScannerResults()
     x = data[0]["pos"]["x"]
     y = data[0]["pos"]["y"]
  
-    asyncio.run(flyToCoordinates(x,y))
+    #asyncio.run(flyToCoordinates(x,y))
+    pointLaserTo(x, y)
     print(data[0])

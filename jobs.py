@@ -3,7 +3,6 @@ import asyncio
 from easySteering import *
 from communication import *
 from cargoHold import *
-from laser import *
 
 
 async def sellEverythingAtCoreStation():
@@ -22,8 +21,8 @@ async def buyIron():
     holdFree = cargoHold.get('hold').get('hold_free')
     while(not holdFree == 0):
         buy("Vesta Station", "IRON", holdFree)
+        cargoHold = getCargoHold()
         holdFree = cargoHold.get('hold').get('hold_free')
-
 
 async def farmPlatin():
     await flyToCoordinates(50489, 77896)
@@ -35,3 +34,4 @@ async def farmPlatin():
     thrusterFront(5)
     time.sleep(5)
     thrusterFront(0)
+
