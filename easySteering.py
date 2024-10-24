@@ -37,3 +37,11 @@ def changeToIdle():
 
     repsponse = requests.post(url, json=data)
     return repsponse.json()
+
+
+def changeToStop():
+    url = "http://192.168.100.18:2009/set_target"
+    data = {"target": "stop"}
+
+    repsponse = requests.post(url, json=data)
+    return repsponse.json()

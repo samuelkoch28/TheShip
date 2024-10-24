@@ -30,26 +30,6 @@ def changeToIdle():
     response = requests.post(url, json=data)
     return response.json()
 
-async def farmGold():
-    configure_oauth()
-
-    while True:
-        await flyToCoordinates(-10000, 20500)
-
-        time.sleep(4)
-        changeToIdle()
-        time.sleep(4)
-        thrusterFront(5)
-        time.sleep(5)
-        thrusterFront(0)
-
-
-        while not is_cargo_full():
-            activate_laser()
-            time.sleep(9)  
-
-        await sellEverythingAtCoreStation()
-
 def pointLaserTo(x2, y2):
     x1 = getCoordinates().get('x')
     y1 = getCoordinates().get('y')

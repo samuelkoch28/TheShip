@@ -31,3 +31,4 @@ while (True):
     #asyncio.run(flyToCoordinates(x,y))
     pointLaserTo(x, y)
     print(data[0])
+

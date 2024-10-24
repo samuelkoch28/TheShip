@@ -22,6 +22,13 @@ def getStructure():
     response = requests.get(url)
     return response.json()
 
+def is_cargo_full():
+    cargo_hold = getCargoHold()
+    hold = cargo_hold.get("hold")
+    hold_free = hold.get("hold_free")
+
+    return hold_free == 0
+
 def optimizeStorage():
     while(True):
         structure = getStructure().get('hold')
