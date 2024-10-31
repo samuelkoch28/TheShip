@@ -2,7 +2,7 @@ from laser import *
 
 
 while True:
-    for i in range(6):
+    for i in range(5):
         activate_laser()
-        time.sleep(10)
-    time.sleep(10)
+        time.sleep(11)
+    deactivate_laser()

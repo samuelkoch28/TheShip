@@ -40,3 +40,25 @@ def optimizeStorage():
                             swapCargo(itemIndex, rowIndex, itemIndex, rowIndex + 1)
                             time.sleep(0.42)
 
+def optimizeStorageForMagnon():
+    while(True):
+        structure = getStructure().get('hold')
+        for rowIndex, row in enumerate(structure):
+            if(rowIndex < 10):
+                for itemIndex, item in enumerate(row):
+                    if(itemIndex < 12 and item is not None):
+                        if(structure[rowIndex + 1][itemIndex] == None):
+                            if(itemIndex == 0):
+                                # nur rechts und unten prüfen
+                                if(structure[rowIndex + 1][itemIndex + 1] == None and structure[rowIndex + 2][itemIndex] == None):
+                                    swapCargo(itemIndex, rowIndex, itemIndex, rowIndex + 1)
+                            if(itemIndex == 11):
+                                # nur links und unten prüfen
+                                if(structure[rowIndex + 1][itemIndex - 1] == None and structure[rowIndex + 2][itemIndex] == None):
+                                    swapCargo(itemIndex, rowIndex, itemIndex, rowIndex + 1)
+                            if(itemIndex > 0 and itemIndex < 11):
+                                # rechts, links und unten prüfen
+                                if(structure[rowIndex + 1][itemIndex - 1] == None and structure[rowIndex + 1][itemIndex + 1] == None and structure[rowIndex + 2][itemIndex] == None):
+                                    swapCargo(itemIndex, rowIndex, itemIndex, rowIndex + 1)
+                            
+                            time.sleep(0.42)

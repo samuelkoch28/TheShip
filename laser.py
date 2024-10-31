@@ -23,6 +23,10 @@ def activate_laser():
     response = requests.post(url)
     print(response.json())
 
+def deactivate_laser():
+    url = "http://192.168.100.18:2018/deactivate"
+    response = requests.post(url)
+    print(response.json())
 
 def changeToIdle():
     url = "http://192.168.100.18:2009/set_target"
